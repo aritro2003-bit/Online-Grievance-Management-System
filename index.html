@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grievance Redressal System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset and Box-Sizing */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #fafbfc;
+            color: #2c3e50;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            text-align: center;
+        }
+
+        /* Professional Header */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        header h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        header p {
+            font-size: 20px;
+            font-weight: 400;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .header-divider {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            margin: 32px auto;
+            border-radius: 2px;
+        }
+
+        /* Main Content Section */
+        main {
+            flex: 1;
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: #7f8c8d;
+            margin-bottom: 64px;
+            text-align: center;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Professional Navigation Cards */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-bottom: 80px;
+        }
+
+        .nav-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px 32px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e8eaed;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .nav-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 16px 32px rgba(0, 0, 0, 0.08);
+            border-color: #3498db;
+        }
+
+        .nav-card-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-card:hover .nav-card-icon {
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            transform: scale(1.1);
+        }
+
+        .nav-card-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-card:hover .nav-card-title {
+            color: #3498db;
+        }
+
+        .nav-card-description {
+            font-size: 14px;
+            color: #6c757d;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .nav-card-link {
+            display: inline-flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 500;
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-card-link::after {
+            content: '→';
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-card:hover .nav-card-link::after {
+            transform: translateX(4px);
+        }
+
+        /* Features Section */
+        .features-section {
+            background: white;
+            padding: 80px 0;
+            border-radius: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-bottom: 80px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 48px;
+            margin-top: 64px;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .feature-description {
+            font-size: 14px;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        /* Professional Footer */
+        footer {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 48px 0;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 48px;
+            margin-bottom: 32px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            color: #bdc3c7;
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #34495e;
+            padding-top: 24px;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            font-size: 14px;
+            color: #95a5a6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            header {
+                padding: 60px 0;
+            }
+
+            header h1 {
+                font-size: 40px;
+                margin-bottom: 16px;
+            }
+
+            header p {
+                font-size: 16px;
+            }
+
+            main {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .nav-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .nav-card {
+                padding: 32px 24px;
+            }
+
+            .features-section {
+                padding: 60px 0;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 32px;
+            }
+
+            header p {
+                font-size: 14px;
+            }
+
+            .nav-card {
+                padding: 24px 20px;
+            }
+
+            .nav-card-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 24px;
+            }
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus indicators for keyboard navigation */
+        .nav-card:focus-visible {
+            outline: 2px solid #3498db;
+            outline-offset: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Professional Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Grievance Redressal System</h1>
+                <div class="header-divider"></div>
+                <p>A comprehensive digital platform designed to efficiently address, track, and resolve your concerns with transparency and accountability.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <h2 class="section-title">Access Portal</h2>
+            <p class="section-subtitle">Choose your preferred method to submit, track, or manage grievances through our secure platform.</p>
+
+            <!-- Professional Navigation Cards -->
+            <div class="nav-grid">
+                <a href="/login" class="nav-card">
+                    <div class="nav-card-icon">🔐</div>
+                    <h3 class="nav-card-title">Admin Login</h3>
+                    <p class="nav-card-description">Secure access for administrators to manage and review submitted grievances with comprehensive dashboard controls.</p>
+                    <span class="nav-card-link">Access Admin Panel</span>
+                </a>
+
+                <a href="/add_grievance" class="nav-card">
+                    <div class="nav-card-icon">📝</div>
+                    <h3 class="nav-card-title">Submit Grievance</h3>
+                    <p class="nav-card-description">File your complaint or concern through our structured form with document upload and tracking capabilities.</p>
+                    <span class="nav-card-link">Submit New Grievance</span>
+                </a>
+
+                <a href="/user_feedback" class="nav-card">
+                    <div class="nav-card-icon">💬</div>
+                    <h3 class="nav-card-title">User Feedback</h3>
+                    <p class="nav-card-description">Share your experience and suggestions to help us improve our grievance resolution process.</p>
+                    <span class="nav-card-link">Provide Feedback</span>
+                </a>
+
+                <a href="/chat" class="nav-card">
+                    <div class="nav-card-icon">🤖</div>
+                    <h3 class="nav-card-title">AI Assistant</h3>
+                    <p class="nav-card-description">Get instant support and guidance through our intelligent chatbot for common queries and procedures.</p>
+                    <span class="nav-card-link">Start Chat</span>
+                </a>
+            </div>
+
+            <!-- Features Section -->
+            <div class="features-section">
+                <h2 class="section-title">Why Choose Our System</h2>
+                <p class="section-subtitle">Built with modern technology to ensure efficient, transparent, and user-friendly grievance resolution.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">Fast Processing</h3>
+                        <p class="feature-description">Streamlined workflow ensures quick acknowledgment and resolution of your concerns.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">🔒</div>
+                        <h3 class="feature-title">Secure Platform</h3>
+                        <p class="feature-description">Enterprise-grade security protecting your personal information and grievance details.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <h3 class="feature-title">Real-time Tracking</h3>
+                        <p class="feature-description">Monitor the progress of your grievance with detailed status updates and notifications.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">🎯</div>
+                        <h3 class="feature-title">Targeted Resolution</h3>
+                        <p class="feature-description">AI-powered categorization ensures your grievance reaches the right department quickly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Professional Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About the System</h3>
+                    <p>Our grievance redressal system is designed to provide citizens with an efficient, transparent, and accessible platform for raising concerns and seeking resolutions.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p>Access all system features including grievance submission, tracking, feedback, and administrative functions through our intuitive interface.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <p>For technical assistance or inquiries about the grievance process, our AI assistant and support team are available to help you.</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Grievance Redressal System. All Rights Reserved. | Designed for transparency and efficiency.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
